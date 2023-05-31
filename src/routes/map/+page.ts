@@ -7,7 +7,7 @@ export async function load() {
   let speed = 10;
 
   // Extraire les routes de la réponse de l'API
-  const routes = data.features.map((feature) => ({
+  const roads = data.features.map((feature) => ({
     id: feature.properties.id,
     maxSpeed: feature.properties.max_speed,
     position: {
@@ -16,9 +16,8 @@ export async function load() {
     },
   }));
 
-  // Object.keys(routes).filter((key) => key[2] === speed);
 
-  routes.filter((route) => route.maxSpeed === speed)
+  roads.filter((road) => road.maxSpeed === speed)
 
-  return { routes };
+  return { roads };
 }
