@@ -1,17 +1,16 @@
-<script>
+<script lang="ts">
 // @ts-nocheck
 
 import { onMount } from 'svelte';
-// import L from "leaflet";
 
 let speed;
 
 const accessToken = "hwukArNqBwb6ZGnQHuiX5shW5a06Jfwh8fbHPCUmYhIt96ZQjRpOQs9WdNqEEHEs"
 
   export let data;
-  const {routes} = data;
+  const { roads } = data;
 
-  console.log("rou", routes);
+  console.log("rou", roads);
 
   let selectedRoad = null;
   let maxSpeedFilter = null;
@@ -89,7 +88,8 @@ error=>console.log(error),
 
 <div>
   <h1>Réseau routier de l'Île-de-France</h1>
-  <label for="max-speed-filter">Filtrer par vitesse maximale :</label>
+  <div class="filter">
+    <label for="max-speed-filter">Filtrer par vitesse maximale :</label>
   <select id="max-speed-filter" bind:value={maxSpeedFilter}>
     <option value="">Tous</option>
     <option value="50">50 km/h</option>
@@ -97,7 +97,8 @@ error=>console.log(error),
     <option value="90">90 km/h</option>
     <option value="130">130 km/h</option>
   </select>
-  {#if routes.length === 0}
+  </div>
+  {#if roads.length === 0}
     <p>Chargement des données...</p>
   {:else}
     <div id="map" style="height: 500px;"></div>
@@ -126,5 +127,9 @@ error=>console.log(error),
 
   #map {
     width: 100%;
+  }
+
+  .filter {
+    margin-bottom: 20px;
   }
 </style>
